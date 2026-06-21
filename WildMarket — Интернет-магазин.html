@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<!-- saved from url=(0254)file:///C:/Users/aceke/AppData/Local/Packages/Claude_pzs8sxrjxfjjc/LocalCache/Roaming/Claude/local-agent-mode-sessions/df580479-e128-465e-9b19-0ba8e16f02aa/5bc63194-db6b-4990-802b-f12797b13317/local_02a26836-c402-4361-a330-f6bd999773a5/outputs/index.html -->
+<html lang="ru"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WildMarket — Интернет-магазин</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #CB11AB;
+      --primary-dark: #a50d8b;
+      --primary-light: #f3e0f0;
+      --gray-100: #f5f5f5;
+      --gray-200: #e8e8e8;
+      --gray-400: #999;
+      --gray-600: #666;
+      --gray-800: #333;
+      --green: #00A046;
+      --red: #E31E24;
+      --yellow: #FFB800;
+      --white: #fff;
+      --radius: 8px;
+      --shadow: 0 2px 12px rgba(0,0,0,.10);
+    }
+
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--gray-100); color: var(--gray-800); }
+
+    /* ───── HEADER ───── */
+    .header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--primary);
+      box-shadow: 0 2px 8px rgba(0,0,0,.2);
+    }
+    .header-top {
+      max-width: 1400px; margin: 0 auto;
+      display: flex; align-items: center; gap: 16px;
+      padding: 10px 16px;
+    }
+    .logo {
+      color: var(--white); font-size: 22px; font-weight: 900;
+      text-decoration: none; white-space: nowrap; letter-spacing: -0.5px;
+    }
+    .logo span { color: #ffd700; }
+
+    .search-wrap {
+      flex: 1; display: flex;
+      background: var(--white); border-radius: 6px; overflow: hidden;
+    }
+    .search-wrap input {
+      flex: 1; border: none; outline: none;
+      padding: 9px 14px; font-size: 14px;
+    }
+    .search-wrap button {
+      background: var(--primary-dark); border: none; cursor: pointer;
+      padding: 9px 18px; color: var(--white); font-size: 18px;
+      transition: background .2s;
+    }
+    .search-wrap button:hover { background: #870a73; }
+
+    .header-actions { display: flex; gap: 4px; }
+    .hbtn {
+      background: none; border: none; cursor: pointer;
+      color: var(--white); display: flex; flex-direction: column;
+      align-items: center; font-size: 10px; gap: 2px;
+      padding: 4px 10px; border-radius: 6px; transition: background .2s;
+      position: relative;
+    }
+    .hbtn:hover { background: rgba(255,255,255,.15); }
+    .hbtn .icon { font-size: 20px; }
+    .badge {
+      position: absolute; top: 0; right: 4px;
+      background: var(--yellow); color: #333;
+      border-radius: 50%; width: 18px; height: 18px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 700;
+    }
+
+    /* ───── NAV ───── */
+    .nav {
+      background: var(--primary-dark);
+      overflow-x: auto; white-space: nowrap;
+    }
+    .nav ul {
+      max-width: 1400px; margin: 0 auto;
+      list-style: none; display: flex; padding: 0 16px;
+    }
+    .nav a {
+      display: block; color: var(--white);
+      text-decoration: none; padding: 9px 16px;
+      font-size: 13px; font-weight: 500;
+      transition: background .2s; border-radius: 4px;
+    }
+    .nav a:hover, .nav a.active { background: rgba(255,255,255,.2); }
+
+    /* ───── BANNER ───── */
+    .banner-wrap {
+      max-width: 1400px; margin: 16px auto 0; padding: 0 16px;
+    }
+    .banner {
+      position: relative; border-radius: var(--radius);
+      overflow: hidden; height: 320px; background: #1a0033;
+    }
+    .banner-slide {
+      position: absolute; inset: 0; opacity: 0;
+      transition: opacity .6s; display: flex; align-items: center;
+    }
+    .banner-slide.active { opacity: 1; }
+    .banner-slide .bg {
+      position: absolute; inset: 0; object-fit: cover; width: 100%; height: 100%;
+    }
+    .banner-content {
+      position: relative; z-index: 1; padding: 32px 48px;
+      max-width: 520px;
+    }
+    .banner-tag {
+      background: var(--yellow); color: #333;
+      font-size: 11px; font-weight: 700; padding: 3px 10px;
+      border-radius: 20px; display: inline-block; margin-bottom: 12px;
+    }
+    .banner-title {
+      color: var(--white); font-size: 32px; font-weight: 900;
+      line-height: 1.2; margin-bottom: 8px;
+    }
+    .banner-sub { color: rgba(255,255,255,.8); font-size: 15px; margin-bottom: 20px; }
+    .btn-banner {
+      background: var(--primary); color: var(--white);
+      border: none; padding: 12px 28px; border-radius: 6px;
+      font-size: 15px; font-weight: 700; cursor: pointer;
+      transition: background .2s;
+    }
+    .btn-banner:hover { background: var(--primary-dark); }
+
+    .banner-dots {
+      position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 8px; z-index: 2;
+    }
+    .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,.4); cursor: pointer; transition: .2s;
+    }
+    .dot.active { background: var(--white); width: 24px; border-radius: 4px; }
+    .banner-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,.25); border: none; color: var(--white);
+      width: 40px; height: 40px; border-radius: 50%; font-size: 18px;
+      cursor: pointer; z-index: 2; transition: background .2s;
+    }
+    .banner-arrow:hover { background: rgba(255,255,255,.45); }
+    .banner-arrow.left { left: 12px; }
+    .banner-arrow.right { right: 12px; }
+
+    /* ───── CONTENT ───── */
+    .content-wrap {
+      max-width: 1400px; margin: 24px auto; padding: 0 16px;
+      display: flex; gap: 20px; align-items: flex-start;
+    }
+
+    /* ───── SIDEBAR ───── */
+    .sidebar { width: 220px; flex-shrink: 0; }
+    .filter-box {
+      background: var(--white); border-radius: var(--radius);
+      padding: 16px; box-shadow: var(--shadow); margin-bottom: 12px;
+    }
+    .filter-box h3 { font-size: 13px; font-weight: 700; margin-bottom: 12px; color: var(--gray-600); text-transform: uppercase; letter-spacing: .5px; }
+    .filter-item { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer; }
+    .filter-item input[type="checkbox"] { accent-color: var(--primary); width: 16px; height: 16px; cursor: pointer; }
+    .filter-item label { font-size: 13px; cursor: pointer; }
+    .filter-item .count { margin-left: auto; color: var(--gray-400); font-size: 12px; }
+
+    .price-range { display: flex; gap: 8px; margin-top: 4px; }
+    .price-range input {
+      width: 100%; border: 1px solid var(--gray-200); border-radius: 4px;
+      padding: 6px 8px; font-size: 13px; outline: none;
+    }
+    .price-range input:focus { border-color: var(--primary); }
+
+    .btn-apply {
+      width: 100%; background: var(--primary); color: var(--white);
+      border: none; padding: 10px; border-radius: 6px; font-size: 14px;
+      font-weight: 600; cursor: pointer; margin-top: 10px; transition: background .2s;
+    }
+    .btn-apply:hover { background: var(--primary-dark); }
+
+    /* ───── PRODUCTS AREA ───── */
+    .products-area { flex: 1; min-width: 0; }
+    .section-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .section-title { font-size: 20px; font-weight: 800; }
+    .sort-select {
+      border: 1px solid var(--gray-200); border-radius: 6px;
+      padding: 7px 12px; font-size: 13px; outline: none; cursor: pointer;
+      background: var(--white);
+    }
+    .sort-select:focus { border-color: var(--primary); }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 14px;
+    }
+
+    /* ───── CARD ───── */
+    .card {
+      background: var(--white); border-radius: var(--radius);
+      box-shadow: var(--shadow); overflow: hidden;
+      transition: transform .2s, box-shadow .2s; cursor: pointer;
+      position: relative;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,.14); }
+    .card-img-wrap { position: relative; overflow: hidden; height: 230px; background: var(--gray-100); }
+    .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s; }
+    .card:hover .card-img-wrap img { transform: scale(1.04); }
+    .card-badge {
+      position: absolute; top: 8px; left: 8px;
+      background: var(--red); color: var(--white);
+      font-size: 11px; font-weight: 700; padding: 3px 7px; border-radius: 4px;
+    }
+    .card-badge.new { background: var(--green); }
+    .card-fav {
+      position: absolute; top: 8px; right: 8px;
+      background: var(--white); border: none; border-radius: 50%;
+      width: 32px; height: 32px; font-size: 16px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 1px 4px rgba(0,0,0,.15); transition: .2s;
+      color: var(--gray-400);
+    }
+    .card-fav:hover, .card-fav.active { color: var(--red); transform: scale(1.1); }
+
+    .card-body { padding: 10px 12px 12px; }
+    .card-brand { font-size: 11px; color: var(--gray-400); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 2px; }
+    .card-name { font-size: 13px; font-weight: 600; line-height: 1.35; margin-bottom: 6px; color: var(--gray-800); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .card-rating { display: flex; align-items: center; gap: 4px; margin-bottom: 8px; }
+    .stars { color: var(--yellow); font-size: 12px; }
+    .rating-num { font-size: 11px; color: var(--gray-600); }
+    .card-prices { display: flex; align-items: baseline; gap: 8px; margin-bottom: 10px; }
+    .price-new { font-size: 17px; font-weight: 800; color: var(--gray-800); }
+    .price-old { font-size: 12px; color: var(--gray-400); text-decoration: line-through; }
+    .price-disc { font-size: 12px; color: var(--red); font-weight: 700; }
+
+    .btn-cart {
+      width: 100%; background: var(--primary); color: var(--white);
+      border: none; padding: 9px; border-radius: 6px; font-size: 13px;
+      font-weight: 600; cursor: pointer; transition: background .2s;
+    }
+    .btn-cart:hover { background: var(--primary-dark); }
+    .btn-cart.in-cart { background: var(--green); }
+
+    /* ───── CART DRAWER ───── */
+    .cart-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,.45);
+      z-index: 200; opacity: 0; pointer-events: none; transition: opacity .3s;
+    }
+    .cart-overlay.open { opacity: 1; pointer-events: all; }
+    .cart-drawer {
+      position: fixed; top: 0; right: -420px; width: 400px; height: 100vh;
+      background: var(--white); z-index: 201; box-shadow: -4px 0 20px rgba(0,0,0,.15);
+      display: flex; flex-direction: column; transition: right .3s;
+    }
+    .cart-drawer.open { right: 0; }
+    .cart-head {
+      background: var(--primary); color: var(--white);
+      padding: 16px 20px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .cart-head h2 { font-size: 18px; }
+    .cart-close { background: none; border: none; color: var(--white); font-size: 24px; cursor: pointer; line-height: 1; }
+    .cart-items { flex: 1; overflow-y: auto; padding: 16px; }
+    .cart-empty { text-align: center; padding: 60px 20px; color: var(--gray-400); }
+    .cart-empty .icon { font-size: 60px; display: block; margin-bottom: 12px; }
+    .cart-item {
+      display: flex; gap: 12px; padding: 12px 0;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .cart-item img { width: 72px; height: 72px; object-fit: cover; border-radius: 6px; flex-shrink: 0; }
+    .cart-item-info { flex: 1; min-width: 0; }
+    .cart-item-name { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.3; }
+    .cart-item-price { font-size: 15px; font-weight: 800; color: var(--primary); }
+    .cart-qty {
+      display: flex; align-items: center; gap: 8px; margin-top: 6px;
+    }
+    .qty-btn {
+      background: var(--gray-100); border: none; border-radius: 50%;
+      width: 26px; height: 26px; font-size: 16px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s;
+    }
+    .qty-btn:hover { background: var(--primary-light); }
+    .qty-num { font-size: 14px; font-weight: 700; min-width: 20px; text-align: center; }
+    .cart-item-del {
+      background: none; border: none; color: var(--gray-400);
+      font-size: 18px; cursor: pointer; padding: 4px; transition: color .2s; align-self: flex-start;
+    }
+    .cart-item-del:hover { color: var(--red); }
+    .cart-foot {
+      padding: 16px 20px; border-top: 2px solid var(--gray-200);
+    }
+    .cart-total { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+    .cart-total span:first-child { font-size: 15px; color: var(--gray-600); }
+    .cart-total-price { font-size: 22px; font-weight: 900; color: var(--gray-800); }
+    .btn-checkout {
+      width: 100%; background: var(--primary); color: var(--white);
+      border: none; padding: 14px; border-radius: 8px; font-size: 16px;
+      font-weight: 700; cursor: pointer; transition: background .2s;
+    }
+    .btn-checkout:hover { background: var(--primary-dark); }
+
+    /* ───── PROMO STRIP ───── */
+    .promo-strip {
+      max-width: 1400px; margin: 24px auto 0; padding: 0 16px;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+    }
+    .promo-card {
+      border-radius: var(--radius); padding: 20px; color: var(--white);
+      font-weight: 700; font-size: 15px; cursor: pointer;
+      transition: opacity .2s; display: flex; flex-direction: column; gap: 6px;
+    }
+    .promo-card:hover { opacity: .88; }
+    .promo-card .promo-icon { font-size: 28px; }
+    .promo-card small { font-size: 12px; font-weight: 400; opacity: .85; }
+
+    /* ───── FOOTER ───── */
+    footer {
+      background: #1a1a2e; color: rgba(255,255,255,.7);
+      margin-top: 48px; padding: 40px 16px 24px;
+    }
+    .footer-inner {
+      max-width: 1400px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px;
+    }
+    footer h4 { color: var(--white); font-size: 14px; margin-bottom: 14px; }
+    footer ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    footer a { color: rgba(255,255,255,.65); text-decoration: none; font-size: 13px; transition: color .2s; }
+    footer a:hover { color: var(--white); }
+    .footer-logo { color: var(--white); font-size: 24px; font-weight: 900; margin-bottom: 10px; display: block; }
+    .footer-logo span { color: #ffd700; }
+    .footer-desc { font-size: 13px; line-height: 1.6; max-width: 260px; }
+    .footer-bottom {
+      max-width: 1400px; margin: 32px auto 0;
+      border-top: 1px solid rgba(255,255,255,.1); padding-top: 20px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 12px; flex-wrap: wrap; gap: 8px;
+    }
+
+    /* ───── MODAL ───── */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,.55);
+      z-index: 300; display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity .25s;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal {
+      background: var(--white); border-radius: 12px; width: 700px; max-width: 95vw;
+      max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,.25);
+      transform: translateY(20px); transition: transform .25s;
+    }
+    .modal-overlay.open .modal { transform: translateY(0); }
+    .modal-img { width: 100%; max-height: 340px; object-fit: cover; border-radius: 12px 12px 0 0; }
+    .modal-body { padding: 24px; }
+    .modal-brand { font-size: 12px; color: var(--gray-400); text-transform: uppercase; letter-spacing: .5px; }
+    .modal-title { font-size: 22px; font-weight: 800; margin: 6px 0 10px; }
+    .modal-rating { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+    .modal-price-row { display: flex; align-items: baseline; gap: 12px; margin-bottom: 20px; }
+    .modal-price { font-size: 28px; font-weight: 900; }
+    .modal-price-old { font-size: 16px; color: var(--gray-400); text-decoration: line-through; }
+    .modal-disc { font-size: 14px; color: var(--red); font-weight: 700; background: #ffeaea; padding: 3px 8px; border-radius: 4px; }
+    .modal-desc { font-size: 14px; line-height: 1.7; color: var(--gray-600); margin-bottom: 20px; }
+    .modal-actions { display: flex; gap: 12px; }
+    .modal-btn {
+      flex: 1; padding: 14px; border-radius: 8px; font-size: 15px;
+      font-weight: 700; cursor: pointer; border: none; transition: .2s;
+    }
+    .modal-btn.primary { background: var(--primary); color: var(--white); }
+    .modal-btn.primary:hover { background: var(--primary-dark); }
+    .modal-btn.outline { background: var(--white); color: var(--primary); border: 2px solid var(--primary); }
+    .modal-btn.outline:hover { background: var(--primary-light); }
+    .modal-close {
+      position: absolute; top: 12px; right: 12px;
+      background: rgba(0,0,0,.4); border: none; color: var(--white);
+      width: 36px; height: 36px; border-radius: 50%; font-size: 18px;
+      cursor: pointer; z-index: 1; display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ───── TOAST ───── */
+    .toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
+      background: #222; color: var(--white); padding: 12px 24px;
+      border-radius: 8px; font-size: 14px; z-index: 400;
+      transition: transform .3s; white-space: nowrap;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    @media (max-width: 900px) {
+      .sidebar { display: none; }
+      .promo-strip { grid-template-columns: repeat(2, 1fr); }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .banner-title { font-size: 22px; }
+      .banner-content { padding: 20px 24px; }
+    }
+    @media (max-width: 600px) {
+      .header-top { padding: 8px 10px; gap: 8px; }
+      .logo { font-size: 18px; }
+      .hbtn span:last-child { display: none; }
+      .promo-strip { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .banner { height: 200px; }
+      .banner-title { font-size: 18px; }
+      .cart-drawer { width: 100%; right: -100%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="header-top">
+    <a class="logo" href="file:///C:/Users/aceke/AppData/Local/Packages/Claude_pzs8sxrjxfjjc/LocalCache/Roaming/Claude/local-agent-mode-sessions/df580479-e128-465e-9b19-0ba8e16f02aa/5bc63194-db6b-4990-802b-f12797b13317/local_02a26836-c402-4361-a330-f6bd999773a5/outputs/index.html#">Wild<span>Market</span></a>
+    <div class="search-wrap">
+      <input type="text" id="searchInput" placeholder="Поиск товаров и брендов...">
+      <button onclick="doSearch()">🔍</button>
+    </div>
+    <div class="header-actions">
+      <button class="hbtn"><span class="icon">❤️</span><span>Избранное</span></button>
+      <button class="hbtn" onclick="openCart()">
+        <span class="icon">🛒</span><span>Корзина</span>
+        <span class="badge" id="cartBadge">0</span>
+      </button>
+      <button class="hbtn"><span class="icon">👤</span><span>Войти</span></button>
+    </div>
+  </div>
+  <nav class="nav">
+    <ul>
+      <li><a href="file:///C:/Users/aceke/AppData/Local/Packages/Claude_pzs8sxrjxfjjc/LocalCache/Roaming/Claude/local-agent-mode-sessions/df580479-e128-465e-9b19-0ba8e16f02aa/5bc63194-db6b-4990-802b-f12797b13317/local_02a26836-c402-4361-a330-f6bd999773a5/outputs/index.html#" class="active" onclick="filterCat(&#39;all&#39;)">Все товары</a></li>
+      <li><a href="file:///C:/Users/aceke/AppData/Local/Packages/Claude_pzs8sxrjxfjjc/LocalCache/Roaming/Claude/local-agent-mode-sessions/df580479-e128-465e-9b19-0ba8e16f02aa/5bc63194-db6b-4990-802b-f12797b13317/local_02a26836-c402-4361-a330-f6bd999773a5/outputs/index.html#" onclick="filterCat(&#39;Электроника&#39;)">Электроника</a></li>
+      <li><a href="file:///C:/Users/aceke/AppData/Local/Packages/Claude_pzs8sxrjxfjjc/LocalCache/Roaming/Claude/local-agent-mode-sessions/df580479-e128-465e-9b19-0ba8e16f02aa/5bc63194-db6b-4990-802b-f12797b13317/local_02a26836-c402-4361-a330-f6bd999773a5/outputs/index.html#" onclick="filterCat(&#39;Одежда&#39;)">Одежда</a></li>
+      <li><a href="file:///C:/Users/aceke/AppData/Local/Packages/Claude_pzs8sxrjxfjjc/LocalCache/Roaming/Claude/local-agent-mode-sessions/df580479-e128-465e-9b19-0ba8e16f02aa/5bc63194-db6b-4990-802b-f12797b13317/local_02a26836-c402-4361-a330-f6bd999773a5/outputs/index.html#" onclick="filterCat(&#39;Обувь&#39;)">Обувь</a></li>
+      <li><a href="file:///C:/Users/aceke/AppData/Local/Packages/Claude_pzs8sxrjxfjjc/LocalCache/Roaming/Claude/local-agent-mode-sessions/df580479-e128-465e-9b19-0ba8e16f02aa/5bc63194-db6b-4990-802b-f12797b13317/local_02a26836-c402-4361-a330-f6bd999773a5/outputs/index.html#" onclick="filterCat(&#39;Дом и сад&#39;)">Дом и сад</a></li>
+      <li><a href="file:///C:/Users/aceke/AppData/Local/Packages/Claude_pzs8sxrjxfjjc/LocalCache/Roaming/Claude/local-agent-mode-sessions/df580479-e128-465e-9b19-0ba8e16f02aa/5bc63194-db6b-4990-802b-f12797b13317/local_02a26836-c402-4361-a330-f6bd999773a5/outputs/index.html#" onclick="filterCat(&#39;Красота&#39;)">Красота</a></li>
+      <li><a href="file:///C:/Users/aceke/AppData/Local/Packages/Claude_pzs8sxrjxfjjc/LocalCache/Roaming/Claude/local-agent-mode-sessions/df580479-e128-465e-9b19-0ba8e16f02aa/5bc63194-db6b-4990-802b-f12797b13317/local_02a26836-c402-4361-a330-f6bd999773a5/outputs/index.html#" onclick="filterCat(&#39;Спорт&#39;)">Спорт</a></li>
+      <li><a href="file:///C:/Users/aceke/AppData/Local/Packages/Claude_pzs8sxrjxfjjc/LocalCache/Roaming/Claude/local-agent-mode-sessions/df580479-e128-465e-9b19-0ba8e16f02aa/5bc63194-db6b-4990-802b-f12797b13317/local_02a26836-c402-4361-a330-f6bd999773a5/outputs/index.html#" onclick="filterCat(&#39;Детям&#39;)">Детям</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ===== BANNER ===== -->
+<div class="banner-wrap">
+  <div class="banner">
+    <div class="banner-slide active" style="background: linear-gradient(135deg, #1a0033 0%, #CB11AB 100%)">
+      <div class="banner-content">
+        <span class="banner-tag">🔥 Распродажа</span>
+        <h1 class="banner-title">Скидки до 70%<br>на электронику</h1>
+        <p class="banner-sub">Смартфоны, ноутбуки, наушники по лучшим ценам</p>
+        <button class="btn-banner" onclick="filterCat(&#39;Электроника&#39;)">Смотреть товары</button>
+      </div>
+    </div>
+    <div class="banner-slide" style="background: linear-gradient(135deg, #0d1b2a 0%, #1e6091 100%)">
+      <div class="banner-content">
+        <span class="banner-tag">🆕 Новинки</span>
+        <h1 class="banner-title">Весенняя коллекция одежды</h1>
+        <p class="banner-sub">Тренды сезона от мировых брендов</p>
+        <button class="btn-banner" onclick="filterCat(&#39;Одежда&#39;)">Перейти в каталог</button>
+      </div>
+    </div>
+    <div class="banner-slide" style="background: linear-gradient(135deg, #1a3300 0%, #00A046 100%)">
+      <div class="banner-content">
+        <span class="banner-tag">💚 Акция</span>
+        <h1 class="banner-title">Спортивные товары со скидкой</h1>
+        <p class="banner-sub">Экипировка и инвентарь для активного образа жизни</p>
+        <button class="btn-banner" onclick="filterCat(&#39;Спорт&#39;)">Выбрать товары</button>
+      </div>
+    </div>
+    <button class="banner-arrow left" onclick="slideBanner(-1)">❮</button>
+    <button class="banner-arrow right" onclick="slideBanner(1)">❯</button>
+    <div class="banner-dots" id="bannerDots"><div class="dot active"></div><div class="dot"></div><div class="dot"></div></div>
+  </div>
+</div>
+
+<!-- ===== PROMO STRIP ===== -->
+<div class="promo-strip">
+  <div class="promo-card" style="background: linear-gradient(135deg,#CB11AB,#ff6b6b)">
+    <span class="promo-icon">🚀</span>
+    <span>Бесплатная доставка</span>
+    <small>от 1 500 ₸</small>
+  </div>
+  <div class="promo-card" style="background: linear-gradient(135deg,#1e6091,#48cae4)">
+    <span class="promo-icon">🔄</span>
+    <span>Возврат 14 дней</span>
+    <small>Без объяснений</small>
+  </div>
+  <div class="promo-card" style="background: linear-gradient(135deg,#00A046,#70e000)">
+    <span class="promo-icon">🛡️</span>
+    <span>Гарантия качества</span>
+    <small>Проверенные продавцы</small>
+  </div>
+  <div class="promo-card" style="background: linear-gradient(135deg,#e85d04,#ffd60a)">
+    <span class="promo-icon">💳</span>
+    <span>Оплата частями</span>
+    <small>0% рассрочка</small>
+  </div>
+</div>
+
+<!-- ===== MAIN CONTENT ===== -->
+<div class="content-wrap">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="filter-box">
+      <h3>Категория</h3>
+      <div class="filter-item"><input type="checkbox" id="f1" checked=""><label for="f1">Электроника</label><span class="count">48</span></div>
+      <div class="filter-item"><input type="checkbox" id="f2" checked=""><label for="f2">Одежда</label><span class="count">124</span></div>
+      <div class="filter-item"><input type="checkbox" id="f3" checked=""><label for="f3">Обувь</label><span class="count">87</span></div>
+      <div class="filter-item"><input type="checkbox" id="f4" checked=""><label for="f4">Красота</label><span class="count">63</span></div>
+      <div class="filter-item"><input type="checkbox" id="f5" checked=""><label for="f5">Спорт</label><span class="count">41</span></div>
+    </div>
+    <div class="filter-box">
+      <h3>Цена (₸)</h3>
+      <div class="price-range">
+        <input type="number" id="priceMin" placeholder="От" min="0">
+        <input type="number" id="priceMax" placeholder="До">
+      </div>
+      <button class="btn-apply" onclick="applyFilters()">Применить</button>
+    </div>
+    <div class="filter-box">
+      <h3>Бренд</h3>
+      <div class="filter-item"><input type="checkbox" id="b1" checked=""><label for="b1">Samsung</label></div>
+      <div class="filter-item"><input type="checkbox" id="b2" checked=""><label for="b2">Apple</label></div>
+      <div class="filter-item"><input type="checkbox" id="b3" checked=""><label for="b3">Nike</label></div>
+      <div class="filter-item"><input type="checkbox" id="b4" checked=""><label for="b4">Adidas</label></div>
+      <div class="filter-item"><input type="checkbox" id="b5" checked=""><label for="b5">Zara</label></div>
+    </div>
+    <div class="filter-box">
+      <h3>Рейтинг</h3>
+      <div class="filter-item"><input type="checkbox" id="r1"><label for="r1">⭐⭐⭐⭐⭐ 5.0</label></div>
+      <div class="filter-item"><input type="checkbox" id="r2" checked=""><label for="r2">⭐⭐⭐⭐ от 4.0</label></div>
+      <div class="filter-item"><input type="checkbox" id="r3" checked=""><label for="r3">⭐⭐⭐ от 3.0</label></div>
+    </div>
+  </aside>
+
+  <!-- Products -->
+  <section class="products-area">
+    <div class="section-header">
+      <h2 class="section-title" id="sectionTitle">Все товары (12)</h2>
+      <select class="sort-select" onchange="sortProducts(this.value)">
+        <option value="popular">По популярности</option>
+        <option value="price_asc">Цена: по возрастанию</option>
+        <option value="price_desc">Цена: по убыванию</option>
+        <option value="rating">По рейтингу</option>
+        <option value="new">Новинки</option>
+      </select>
+    </div>
+    <div class="products-grid" id="productsGrid">
+    <div class="card" onclick="openModal(1)">
+      <div class="card-img-wrap">
+        <img src="./WildMarket — Интернет-магазин_files/photo-1610945415295-d9bbf067e59c" alt="Samsung Galaxy S24 Ultra 256GB" loading="lazy">
+        <span class="card-badge">-25%</span>
+        <button class="card-fav " onclick="event.stopPropagation();toggleFav(1)" title="В избранное">❤</button>
+      </div>
+      <div class="card-body">
+        <div class="card-brand">Samsung</div>
+        <div class="card-name">Samsung Galaxy S24 Ultra 256GB</div>
+        <div class="card-rating">
+          <span class="stars">★★★★★</span>
+          <span class="rating-num">4.8 (3&nbsp;241)</span>
+        </div>
+        <div class="card-prices">
+          <span class="price-new">489&nbsp;000 ₸</span>
+          <span class="price-old">649&nbsp;000 ₸</span>
+          <span class="price-disc">-25%</span>
+        </div>
+        <button class="btn-cart " onclick="event.stopPropagation();addToCart(1)">
+          + В корзину
+        </button>
+      </div>
+    </div>
+    <div class="card" onclick="openModal(2)">
+      <div class="card-img-wrap">
+        <img src="./WildMarket — Интернет-магазин_files/photo-1695048133142-1a20484d2569" alt="Apple iPhone 15 Pro Max 256GB" loading="lazy">
+        
+        <button class="card-fav " onclick="event.stopPropagation();toggleFav(2)" title="В избранное">❤</button>
+      </div>
+      <div class="card-body">
+        <div class="card-brand">Apple</div>
+        <div class="card-name">Apple iPhone 15 Pro Max 256GB</div>
+        <div class="card-rating">
+          <span class="stars">★★★★★</span>
+          <span class="rating-num">4.9 (5&nbsp;120)</span>
+        </div>
+        <div class="card-prices">
+          <span class="price-new">789&nbsp;000 ₸</span>
+          <span class="price-old">899&nbsp;000 ₸</span>
+          <span class="price-disc">-12%</span>
+        </div>
+        <button class="btn-cart " onclick="event.stopPropagation();addToCart(2)">
+          + В корзину
+        </button>
+      </div>
+    </div>
+    <div class="card" onclick="openModal(3)">
+      <div class="card-img-wrap">
+        <img src="./WildMarket — Интернет-магазин_files/photo-1542291026-7eec264c27ff" alt="Nike Air Max 270 мужские" loading="lazy">
+        <span class="card-badge">-27%</span>
+        <button class="card-fav " onclick="event.stopPropagation();toggleFav(3)" title="В избранное">❤</button>
+      </div>
+      <div class="card-body">
+        <div class="card-brand">Nike</div>
+        <div class="card-name">Nike Air Max 270 мужские</div>
+        <div class="card-rating">
+          <span class="stars">★★★★★</span>
+          <span class="rating-num">4.7 (892)</span>
+        </div>
+        <div class="card-prices">
+          <span class="price-new">45&nbsp;000 ₸</span>
+          <span class="price-old">62&nbsp;000 ₸</span>
+          <span class="price-disc">-27%</span>
+        </div>
+        <button class="btn-cart " onclick="event.stopPropagation();addToCart(3)">
+          + В корзину
+        </button>
+      </div>
+    </div>
+    <div class="card" onclick="openModal(4)">
+      <div class="card-img-wrap">
+        <img src="./WildMarket — Интернет-магазин_files/photo-1595777457583-95e059d581b8" alt="Платье Zara миди с цветочным принтом" loading="lazy">
+        <span class="card-badge new">NEW</span>
+        <button class="card-fav " onclick="event.stopPropagation();toggleFav(4)" title="В избранное">❤</button>
+      </div>
+      <div class="card-body">
+        <div class="card-brand">Zara</div>
+        <div class="card-name">Платье Zara миди с цветочным принтом</div>
+        <div class="card-rating">
+          <span class="stars">★★★★★</span>
+          <span class="rating-num">4.5 (441)</span>
+        </div>
+        <div class="card-prices">
+          <span class="price-new">18&nbsp;900 ₸</span>
+          <span class="price-old">24&nbsp;900 ₸</span>
+          <span class="price-disc">-24%</span>
+        </div>
+        <button class="btn-cart " onclick="event.stopPropagation();addToCart(4)">
+          + В корзину
+        </button>
+      </div>
+    </div>
+    <div class="card" onclick="openModal(5)">
+      <div class="card-img-wrap">
+        <img src="./WildMarket — Интернет-магазин_files/photo-1505740420928-5e560c06d30e" alt="Sony WH-1000XM5 наушники" loading="lazy">
+        <span class="card-badge">-22%</span>
+        <button class="card-fav " onclick="event.stopPropagation();toggleFav(5)" title="В избранное">❤</button>
+      </div>
+      <div class="card-body">
+        <div class="card-brand">Sony</div>
+        <div class="card-name">Sony WH-1000XM5 наушники</div>
+        <div class="card-rating">
+          <span class="stars">★★★★★</span>
+          <span class="rating-num">4.9 (2&nbsp;107)</span>
+        </div>
+        <div class="card-prices">
+          <span class="price-new">179&nbsp;000 ₸</span>
+          <span class="price-old">229&nbsp;000 ₸</span>
+          <span class="price-disc">-22%</span>
+        </div>
+        <button class="btn-cart " onclick="event.stopPropagation();addToCart(5)">
+          + В корзину
+        </button>
+      </div>
+    </div>
+    <div class="card" onclick="openModal(6)">
+      <div class="card-img-wrap">
+        <img src="./WildMarket — Интернет-магазин_files/photo-1608231387042-66d1773070a5" alt="Adidas Ultraboost 23 мужские" loading="lazy">
+        
+        <button class="card-fav " onclick="event.stopPropagation();toggleFav(6)" title="В избранное">❤</button>
+      </div>
+      <div class="card-body">
+        <div class="card-brand">Adidas</div>
+        <div class="card-name">Adidas Ultraboost 23 мужские</div>
+        <div class="card-rating">
+          <span class="stars">★★★★★</span>
+          <span class="rating-num">4.8 (673)</span>
+        </div>
+        <div class="card-prices">
+          <span class="price-new">62&nbsp;000 ₸</span>
+          <span class="price-old">82&nbsp;000 ₸</span>
+          <span class="price-disc">-24%</span>
+        </div>
+        <button class="btn-cart " onclick="event.stopPropagation();addToCart(6)">
+          + В корзину
+        </button>
+      </div>
+    </div>
+    <div class="card" onclick="openModal(7)">
+      <div class="card-img-wrap">
+        <img src="./WildMarket — Интернет-магазин_files/photo-1558618666-fcd25c85cd64" alt="Dyson V15 Detect пылесос" loading="lazy">
+        
+        <button class="card-fav " onclick="event.stopPropagation();toggleFav(7)" title="В избранное">❤</button>
+      </div>
+      <div class="card-body">
+        <div class="card-brand">Dyson</div>
+        <div class="card-name">Dyson V15 Detect пылесос</div>
+        <div class="card-rating">
+          <span class="stars">★★★★★</span>
+          <span class="rating-num">4.7 (1&nbsp;893)</span>
+        </div>
+        <div class="card-prices">
+          <span class="price-new">349&nbsp;000 ₸</span>
+          <span class="price-old">429&nbsp;000 ₸</span>
+          <span class="price-disc">-19%</span>
+        </div>
+        <button class="btn-cart " onclick="event.stopPropagation();addToCart(7)">
+          + В корзину
+        </button>
+      </div>
+    </div>
+    <div class="card" onclick="openModal(8)">
+      <div class="card-img-wrap">
+        <img src="./WildMarket — Интернет-магазин_files/photo-1512290923902-8a9f81dc236c" alt="La Mer крем для лица 30мл" loading="lazy">
+        
+        <button class="card-fav " onclick="event.stopPropagation();toggleFav(8)" title="В избранное">❤</button>
+      </div>
+      <div class="card-body">
+        <div class="card-brand">La Mer</div>
+        <div class="card-name">La Mer крем для лица 30мл</div>
+        <div class="card-rating">
+          <span class="stars">★★★★★</span>
+          <span class="rating-num">4.6 (556)</span>
+        </div>
+        <div class="card-prices">
+          <span class="price-new">89&nbsp;000 ₸</span>
+          <span class="price-old">109&nbsp;000 ₸</span>
+          <span class="price-disc">-18%</span>
+        </div>
+        <button class="btn-cart " onclick="event.stopPropagation();addToCart(8)">
+          + В корзину
+        </button>
+      </div>
+    </div>
+    <div class="card" onclick="openModal(9)">
+      <div class="card-img-wrap">
+        <img src="./WildMarket — Интернет-магазин_files/photo-1551488831-00ddcb6c6bd3" alt="Куртка пуховая The North Face" loading="lazy">
+        <span class="card-badge">-24%</span>
+        <button class="card-fav " onclick="event.stopPropagation();toggleFav(9)" title="В избранное">❤</button>
+      </div>
+      <div class="card-body">
+        <div class="card-brand">The North Face</div>
+        <div class="card-name">Куртка пуховая The North Face</div>
+        <div class="card-rating">
+          <span class="stars">★★★★★</span>
+          <span class="rating-num">4.8 (1&nbsp;205)</span>
+        </div>
+        <div class="card-prices">
+          <span class="price-new">129&nbsp;000 ₸</span>
+          <span class="price-old">169&nbsp;000 ₸</span>
+          <span class="price-disc">-24%</span>
+        </div>
+        <button class="btn-cart " onclick="event.stopPropagation();addToCart(9)">
+          + В корзину
+        </button>
+      </div>
+    </div>
+    <div class="card" onclick="openModal(10)">
+      <div class="card-img-wrap">
+        <img src="./WildMarket — Интернет-магазин_files/photo-1544244015-0df4b3ffc6b0" alt="iPad Pro 12.9" m2="" 256gb="" wifi"="" loading="lazy">
+        
+        <button class="card-fav " onclick="event.stopPropagation();toggleFav(10)" title="В избранное">❤</button>
+      </div>
+      <div class="card-body">
+        <div class="card-brand">Apple</div>
+        <div class="card-name">iPad Pro 12.9" M2 256GB WiFi</div>
+        <div class="card-rating">
+          <span class="stars">★★★★★</span>
+          <span class="rating-num">4.9 (2&nbsp;340)</span>
+        </div>
+        <div class="card-prices">
+          <span class="price-new">699&nbsp;000 ₸</span>
+          <span class="price-old">799&nbsp;000 ₸</span>
+          <span class="price-disc">-13%</span>
+        </div>
+        <button class="btn-cart " onclick="event.stopPropagation();addToCart(10)">
+          + В корзину
+        </button>
+      </div>
+    </div>
+    <div class="card" onclick="openModal(11)">
+      <div class="card-img-wrap">
+        <img src="./WildMarket — Интернет-магазин_files/photo-1601925260368-ae2f83cf8b7f" alt="Yoga Мat Premium 6мм" loading="lazy">
+        <span class="card-badge new">NEW</span>
+        <button class="card-fav " onclick="event.stopPropagation();toggleFav(11)" title="В избранное">❤</button>
+      </div>
+      <div class="card-body">
+        <div class="card-brand">Manduka</div>
+        <div class="card-name">Yoga Мat Premium 6мм</div>
+        <div class="card-rating">
+          <span class="stars">★★★★★</span>
+          <span class="rating-num">4.6 (334)</span>
+        </div>
+        <div class="card-prices">
+          <span class="price-new">22&nbsp;000 ₸</span>
+          <span class="price-old">29&nbsp;000 ₸</span>
+          <span class="price-disc">-24%</span>
+        </div>
+        <button class="btn-cart " onclick="event.stopPropagation();addToCart(11)">
+          + В корзину
+        </button>
+      </div>
+    </div>
+    <div class="card" onclick="openModal(12)">
+      <div class="card-img-wrap">
+        <img src="./WildMarket — Интернет-магазин_files/photo-1519689680058-324335c77eba" alt="Детская коляска Stokke Xplory X" loading="lazy">
+        
+        <button class="card-fav " onclick="event.stopPropagation();toggleFav(12)" title="В избранное">❤</button>
+      </div>
+      <div class="card-body">
+        <div class="card-brand">Stokke</div>
+        <div class="card-name">Детская коляска Stokke Xplory X</div>
+        <div class="card-rating">
+          <span class="stars">★★★★★</span>
+          <span class="rating-num">4.8 (218)</span>
+        </div>
+        <div class="card-prices">
+          <span class="price-new">389&nbsp;000 ₸</span>
+          <span class="price-old">459&nbsp;000 ₸</span>
+          <span class="price-disc">-15%</span>
+        </div>
+        <button class="btn-cart " onclick="event.stopPropagation();addToCart(12)">
+          + В корзину
+        </button>
+      </div>
+    </div></div>
+  </section>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <span class="footer-logo">Wild<span style="color:#ffd700">Market</span></span>
+      <p class="footer-desc">Крупнейший интернет-магазин Казахстана. Миллионы товаров от проверенных продавцов с доставкой по всей стране.</p>
+    </div>
+    <div>
+      <h4>Покупателям</h4>
+      <ul>
+        <li><a href="file:///C:/Users/aceke/AppData/Local/Packages/Claude_pzs8sxrjxfjjc/LocalCache/Roaming/Claude/local-agent-mode-sessions/df580479-e128-465e-9b19-0ba8e16f02aa/5bc63194-db6b-4990-802b-f12797b13317/local_02a26836-c402-4361-a330-f6bd999773a5/outputs/index.html#">Как сделать заказ</a></li>
+        <li><a href="file:///C:/Users/aceke/AppData/Local/Packages/Claude_pzs8sxrjxfjjc/LocalCache/Roaming/Claude/local-agent-mode-sessions/df580479-e128-465e-9b19-0ba8e16f02aa/5bc63194-db6b-4990-802b-f12797b13317/local_02a26836-c402-4361-a330-f6bd999773a5/outputs/index.html#">Способы оплаты</a></li>
+        <li><a href="file:///C:/Users/aceke/AppData/Local/Packages/Claude_pzs8sxrjxfjjc/LocalCache/Roaming/Claude/local-agent-mode-sessions/df580479-e128-465e-9b19-0ba8e16f02aa/5bc63194-db6b-4990-802b-f12797b13317/local_02a26836-c402-4361-a330-f6bd999773a5/outputs/index.html#">Доставка</a></li>
+        <li><a href="file:///C:/Users/aceke/AppData/Local/Packages/Claude_pzs8sxrjxfjjc/LocalCache/Roaming/Claude/local-agent-mode-sessions/df580479-e128-465e-9b19-0ba8e16f02aa/5bc63194-db6b-4990-802b-f12797b13317/local_02a26836-c402-4361-a330-f6bd999773a5/outputs/index.html#">Возврат товара</a></li>
+        <li><a href="file:///C:/Users/aceke/AppData/Local/Packages/Claude_pzs8sxrjxfjjc/LocalCache/Roaming/Claude/local-agent-mode-sessions/df580479-e128-465e-9b19-0ba8e16f02aa/5bc63194-db6b-4990-802b-f12797b13317/local_02a26836-c402-4361-a330-f6bd999773a5/outputs/index.html#">Бонусная программа</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Продавцам</h4>
+      <ul>
+        <li><a href="file:///C:/Users/aceke/AppData/Local/Packages/Claude_pzs8sxrjxfjjc/LocalCache/Roaming/Claude/local-agent-mode-sessions/df580479-e128-465e-9b19-0ba8e16f02aa/5bc63194-db6b-4990-802b-f12797b13317/local_02a26836-c402-4361-a330-f6bd999773a5/outputs/index.html#">Стать продавцом</a></li>
+        <li><a href="file:///C:/Users/aceke/AppData/Local/Packages/Claude_pzs8sxrjxfjjc/LocalCache/Roaming/Claude/local-agent-mode-sessions/df580479-e128-465e-9b19-0ba8e16f02aa/5bc63194-db6b-4990-802b-f12797b13317/local_02a26836-c402-4361-a330-f6bd999773a5/outputs/index.html#">Кабинет продавца</a></li>
+        <li><a href="file:///C:/Users/aceke/AppData/Local/Packages/Claude_pzs8sxrjxfjjc/LocalCache/Roaming/Claude/local-agent-mode-sessions/df580479-e128-465e-9b19-0ba8e16f02aa/5bc63194-db6b-4990-802b-f12797b13317/local_02a26836-c402-4361-a330-f6bd999773a5/outputs/index.html#">Комиссии</a></li>
+        <li><a href="file:///C:/Users/aceke/AppData/Local/Packages/Claude_pzs8sxrjxfjjc/LocalCache/Roaming/Claude/local-agent-mode-sessions/df580479-e128-465e-9b19-0ba8e16f02aa/5bc63194-db6b-4990-802b-f12797b13317/local_02a26836-c402-4361-a330-f6bd999773a5/outputs/index.html#">Реклама</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Компания</h4>
+      <ul>
+        <li><a href="file:///C:/Users/aceke/AppData/Local/Packages/Claude_pzs8sxrjxfjjc/LocalCache/Roaming/Claude/local-agent-mode-sessions/df580479-e128-465e-9b19-0ba8e16f02aa/5bc63194-db6b-4990-802b-f12797b13317/local_02a26836-c402-4361-a330-f6bd999773a5/outputs/index.html#">О нас</a></li>
+        <li><a href="file:///C:/Users/aceke/AppData/Local/Packages/Claude_pzs8sxrjxfjjc/LocalCache/Roaming/Claude/local-agent-mode-sessions/df580479-e128-465e-9b19-0ba8e16f02aa/5bc63194-db6b-4990-802b-f12797b13317/local_02a26836-c402-4361-a330-f6bd999773a5/outputs/index.html#">Вакансии</a></li>
+        <li><a href="file:///C:/Users/aceke/AppData/Local/Packages/Claude_pzs8sxrjxfjjc/LocalCache/Roaming/Claude/local-agent-mode-sessions/df580479-e128-465e-9b19-0ba8e16f02aa/5bc63194-db6b-4990-802b-f12797b13317/local_02a26836-c402-4361-a330-f6bd999773a5/outputs/index.html#">Пресса</a></li>
+        <li><a href="file:///C:/Users/aceke/AppData/Local/Packages/Claude_pzs8sxrjxfjjc/LocalCache/Roaming/Claude/local-agent-mode-sessions/df580479-e128-465e-9b19-0ba8e16f02aa/5bc63194-db6b-4990-802b-f12797b13317/local_02a26836-c402-4361-a330-f6bd999773a5/outputs/index.html#">Контакты</a></li>
+        <li><a href="file:///C:/Users/aceke/AppData/Local/Packages/Claude_pzs8sxrjxfjjc/LocalCache/Roaming/Claude/local-agent-mode-sessions/df580479-e128-465e-9b19-0ba8e16f02aa/5bc63194-db6b-4990-802b-f12797b13317/local_02a26836-c402-4361-a330-f6bd999773a5/outputs/index.html#">Политика конфиденциальности</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 WildMarket. Все права защищены.</span>
+    <span>🇰🇿 Казахстан · Работаем по всей стране</span>
+  </div>
+</footer>
+
+<!-- ===== CART DRAWER ===== -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-head">
+    <h2>🛒 Корзина</h2>
+    <button class="cart-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-foot" id="cartFoot" style="display:none">
+    <div class="cart-total">
+      <span>Итого:</span>
+      <span class="cart-total-price" id="cartTotal">0 ₸</span>
+    </div>
+    <button class="btn-checkout" onclick="checkout()">Оформить заказ</button>
+  </div>
+</div>
+
+<!-- ===== PRODUCT MODAL ===== -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="productModal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <img class="modal-img" id="modalImg" src="file:///C:/Users/aceke/AppData/Local/Packages/Claude_pzs8sxrjxfjjc/LocalCache/Roaming/Claude/local-agent-mode-sessions/df580479-e128-465e-9b19-0ba8e16f02aa/5bc63194-db6b-4990-802b-f12797b13317/local_02a26836-c402-4361-a330-f6bd999773a5/outputs/index.html" alt="">
+    <div class="modal-body">
+      <div class="modal-brand" id="modalBrand"></div>
+      <h2 class="modal-title" id="modalTitle"></h2>
+      <div class="modal-rating" id="modalRating"></div>
+      <div class="modal-price-row">
+        <span class="modal-price" id="modalPrice"></span>
+        <span class="modal-price-old" id="modalOld"></span>
+        <span class="modal-disc" id="modalDisc"></span>
+      </div>
+      <p class="modal-desc" id="modalDesc"></p>
+      <div class="modal-actions">
+        <button class="modal-btn outline" onclick="toggleFav(currentModalId)">❤️ В избранное</button>
+        <button class="modal-btn primary" onclick="addToCartFromModal()">🛒 В корзину</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TOAST ===== -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ───── DATA ─────
+const products = [
+  { id:1, name:"Samsung Galaxy S24 Ultra 256GB", brand:"Samsung", cat:"Электроника", price:489000, oldPrice:649000, disc:25, rating:4.8, reviews:3241, img:"https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=400&h=500&fit=crop", badge:"sale", desc:"Флагманский смартфон с революционной камерой 200 МП, встроенным S Pen и мощным процессором Snapdragon 8 Gen 3. Дисплей Dynamic AMOLED 6.8'' с частотой обновления 120 Гц." },
+  { id:2, name:"Apple iPhone 15 Pro Max 256GB", brand:"Apple", cat:"Электроника", price:789000, oldPrice:899000, disc:12, rating:4.9, reviews:5120, img:"https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=400&h=500&fit=crop", badge:"", desc:"Titanium корпус, чип A17 Pro, система камер Pro с 5-кратным оптическим зумом. USB-C с поддержкой USB 3 для профессиональных съёмок." },
+  { id:3, name:"Nike Air Max 270 мужские", brand:"Nike", cat:"Обувь", price:45000, oldPrice:62000, disc:27, rating:4.7, reviews:892, img:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=500&fit=crop", badge:"sale", desc:"Культовые кроссовки с самой большой воздушной подушкой Air Max в носочной части. Верх из сетки и синтетических материалов обеспечивает воздухопроницаемость." },
+  { id:4, name:"Платье Zara миди с цветочным принтом", brand:"Zara", cat:"Одежда", price:18900, oldPrice:24900, disc:24, rating:4.5, reviews:441, img:"https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&h=500&fit=crop", badge:"new", desc:"Элегантное платье миди с романтичным цветочным принтом. Свободный крой, V-образный вырез и воланы по подолу. Состав: 100% вискоза." },
+  { id:5, name:"Sony WH-1000XM5 наушники", brand:"Sony", cat:"Электроника", price:179000, oldPrice:229000, disc:22, rating:4.9, reviews:2107, img:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=500&fit=crop", badge:"sale", desc:"Лучшее шумоподавление в классе. До 30 часов работы от аккумулятора. Быстрая зарядка: 3 минуты — 3 часа прослушивания. Hi-Res Audio." },
+  { id:6, name:"Adidas Ultraboost 23 мужские", brand:"Adidas", cat:"Спорт", price:62000, oldPrice:82000, disc:24, rating:4.8, reviews:673, img:"https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=400&h=500&fit=crop", badge:"", desc:"Беговые кроссовки с технологией Boost для максимального возврата энергии. Верх Primeknit+ адаптируется к форме стопы. Отличный выбор для длинных дистанций." },
+  { id:7, name:"Dyson V15 Detect пылесос", brand:"Dyson", cat:"Дом и сад", price:349000, oldPrice:429000, disc:19, rating:4.7, reviews:1893, img:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=500&fit=crop", badge:"", desc:"Беспроводной пылесос с лазерным обнаружением пыли и акустическим датчиком для точного отслеживания уборки. Мощность всасывания 230 АВт." },
+  { id:8, name:"La Mer крем для лица 30мл", brand:"La Mer", cat:"Красота", price:89000, oldPrice:109000, disc:18, rating:4.6, reviews:556, img:"https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=400&h=500&fit=crop", badge:"", desc:"Легендарный увлажняющий крем на основе запатентованного Miracle Broth. Восстанавливает, питает и осветляет кожу. Для всех типов кожи." },
+  { id:9, name:"Куртка пуховая The North Face", brand:"The North Face", cat:"Одежда", price:129000, oldPrice:169000, disc:24, rating:4.8, reviews:1205, img:"https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?w=400&h=500&fit=crop", badge:"sale", desc:"Тёплая пуховая куртка с наполнением 700 Fill Power. Водоотталкивающая обработка DWR. Идеальна для горных походов и городских прогулок." },
+  { id:10, name:"iPad Pro 12.9\" M2 256GB WiFi", brand:"Apple", cat:"Электроника", price:699000, oldPrice:799000, disc:13, rating:4.9, reviews:2340, img:"https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400&h=500&fit=crop", badge:"", desc:"Чип M2, дисплей Liquid Retina XDR с ProMotion 120 Гц, поддержка Apple Pencil 2 и Magic Keyboard. Профессиональный инструмент в тонком корпусе." },
+  { id:11, name:"Yoga Мat Premium 6мм", brand:"Manduka", cat:"Спорт", price:22000, oldPrice:29000, disc:24, rating:4.6, reviews:334, img:"https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=400&h=500&fit=crop", badge:"new", desc:"Профессиональный коврик для йоги из экологичного материала. Закрытоячеистый NBR пенополиуретан толщиной 6 мм. Нескользящая поверхность с обеих сторон." },
+  { id:12, name:"Детская коляска Stokke Xplory X", brand:"Stokke", cat:"Детям", price:389000, oldPrice:459000, disc:15, rating:4.8, reviews:218, img:"https://images.unsplash.com/photo-1519689680058-324335c77eba?w=400&h=500&fit=crop", badge:"", desc:"Скандинавская дизайнерская коляска с регулируемым сиденьем. Ребёнок находится близко к родителю на высоком уровне. Лёгкая алюминиевая рама." },
+];
+
+let cart = JSON.parse(localStorage.getItem('wm_cart') || '[]');
+let favorites = new Set(JSON.parse(localStorage.getItem('wm_favs') || '[]'));
+let currentCat = 'all';
+let currentSort = 'popular';
+let currentModalId = null;
+
+// ───── BANNER ─────
+let slideIndex = 0;
+const slides = document.querySelectorAll('.banner-slide');
+const dotsWrap = document.getElementById('bannerDots');
+
+slides.forEach((_, i) => {
+  const d = document.createElement('div');
+  d.className = 'dot' + (i === 0 ? ' active' : '');
+  d.onclick = () => goSlide(i);
+  dotsWrap.appendChild(d);
+});
+
+function goSlide(n) {
+  slides[slideIndex].classList.remove('active');
+  document.querySelectorAll('.dot')[slideIndex].classList.remove('active');
+  slideIndex = (n + slides.length) % slides.length;
+  slides[slideIndex].classList.add('active');
+  document.querySelectorAll('.dot')[slideIndex].classList.add('active');
+}
+function slideBanner(dir) { goSlide(slideIndex + dir); }
+setInterval(() => goSlide(slideIndex + 1), 5000);
+
+// ───── RENDER PRODUCTS ─────
+function getFiltered() {
+  let list = [...products];
+  if (currentCat !== 'all') list = list.filter(p => p.cat === currentCat);
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  if (q) list = list.filter(p => p.name.toLowerCase().includes(q) || p.brand.toLowerCase().includes(q) || p.cat.toLowerCase().includes(q));
+  const min = parseFloat(document.getElementById('priceMin')?.value) || 0;
+  const max = parseFloat(document.getElementById('priceMax')?.value) || Infinity;
+  list = list.filter(p => p.price >= min && p.price <= max);
+  if (currentSort === 'price_asc') list.sort((a,b) => a.price - b.price);
+  else if (currentSort === 'price_desc') list.sort((a,b) => b.price - a.price);
+  else if (currentSort === 'rating') list.sort((a,b) => b.rating - a.rating);
+  else if (currentSort === 'new') list.sort((a,b) => (b.badge==='new'?1:0) - (a.badge==='new'?1:0));
+  return list;
+}
+
+function render() {
+  const grid = document.getElementById('productsGrid');
+  const list = getFiltered();
+  document.getElementById('sectionTitle').textContent = currentCat === 'all' ? `Все товары (${list.length})` : `${currentCat} (${list.length})`;
+  if (!list.length) { grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px;color:#999;font-size:16px">😔 По вашему запросу ничего не найдено</div>'; return; }
+  grid.innerHTML = list.map(p => {
+    const inCart = cart.some(c => c.id === p.id);
+    const isFav = favorites.has(p.id);
+    return `
+    <div class="card" onclick="openModal(${p.id})">
+      <div class="card-img-wrap">
+        <img src="${p.img}" alt="${p.name}" loading="lazy" />
+        ${p.badge === 'sale' ? '<span class="card-badge">-'+p.disc+'%</span>' : p.badge === 'new' ? '<span class="card-badge new">NEW</span>' : ''}
+        <button class="card-fav ${isFav?'active':''}" onclick="event.stopPropagation();toggleFav(${p.id})" title="В избранное">❤</button>
+      </div>
+      <div class="card-body">
+        <div class="card-brand">${p.brand}</div>
+        <div class="card-name">${p.name}</div>
+        <div class="card-rating">
+          <span class="stars">${'★'.repeat(Math.round(p.rating))}${'☆'.repeat(5-Math.round(p.rating))}</span>
+          <span class="rating-num">${p.rating} (${p.reviews.toLocaleString()})</span>
+        </div>
+        <div class="card-prices">
+          <span class="price-new">${p.price.toLocaleString()} ₸</span>
+          ${p.oldPrice ? `<span class="price-old">${p.oldPrice.toLocaleString()} ₸</span>` : ''}
+          ${p.disc ? `<span class="price-disc">-${p.disc}%</span>` : ''}
+        </div>
+        <button class="btn-cart ${inCart?'in-cart':''}" onclick="event.stopPropagation();addToCart(${p.id})">
+          ${inCart ? '✓ В корзине' : '+ В корзину'}
+        </button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ───── CART ─────
+function saveCart() { localStorage.setItem('wm_cart', JSON.stringify(cart)); updateBadge(); }
+
+function addToCart(id) {
+  const p = products.find(x => x.id === id);
+  const ex = cart.find(c => c.id === id);
+  if (ex) { ex.qty++; } else { cart.push({...p, qty:1}); }
+  saveCart(); render(); renderCart();
+  showToast(`«${p.name.slice(0,30)}...» добавлен в корзину`);
+}
+
+function addToCartFromModal() {
+  addToCart(currentModalId);
+}
+
+function updateBadge() {
+  const total = cart.reduce((s, c) => s + c.qty, 0);
+  document.getElementById('cartBadge').textContent = total;
+}
+
+function openCart() {
+  document.getElementById('cartOverlay').classList.add('open');
+  document.getElementById('cartDrawer').classList.add('open');
+  renderCart();
+}
+function closeCart() {
+  document.getElementById('cartOverlay').classList.remove('open');
+  document.getElementById('cartDrawer').classList.remove('open');
+}
+
+function renderCart() {
+  const items = document.getElementById('cartItems');
+  const foot = document.getElementById('cartFoot');
+  if (!cart.length) {
+    items.innerHTML = '<div class="cart-empty"><span class="icon">🛒</span><p>Корзина пуста</p><p style="margin-top:8px;font-size:13px">Добавьте товары из каталога</p></div>';
+    foot.style.display = 'none'; return;
+  }
+  foot.style.display = 'block';
+  items.innerHTML = cart.map(c => `
+    <div class="cart-item">
+      <img src="${c.img}" alt="${c.name}" />
+      <div class="cart-item-info">
+        <div class="cart-item-name">${c.name}</div>
+        <div class="cart-item-price">${(c.price * c.qty).toLocaleString()} ₸</div>
+        <div class="cart-qty">
+          <button class="qty-btn" onclick="changeQty(${c.id},-1)">−</button>
+          <span class="qty-num">${c.qty}</span>
+          <button class="qty-btn" onclick="changeQty(${c.id},1)">+</button>
+        </div>
+      </div>
+      <button class="cart-item-del" onclick="removeFromCart(${c.id})" title="Удалить">🗑</button>
+    </div>`).join('');
+  const total = cart.reduce((s,c) => s + c.price * c.qty, 0);
+  document.getElementById('cartTotal').textContent = total.toLocaleString() + ' ₸';
+}
+
+function changeQty(id, d) {
+  const item = cart.find(c => c.id === id);
+  if (!item) return;
+  item.qty += d;
+  if (item.qty <= 0) cart = cart.filter(c => c.id !== id);
+  saveCart(); renderCart(); render();
+}
+function removeFromCart(id) {
+  cart = cart.filter(c => c.id !== id);
+  saveCart(); renderCart(); render();
+}
+function checkout() {
+  showToast('🎉 Заказ оформлен! Спасибо за покупку!');
+  cart = []; saveCart(); renderCart(); render(); closeCart();
+}
+
+// ───── FAVORITES ─────
+function toggleFav(id) {
+  if (favorites.has(id)) favorites.delete(id); else favorites.add(id);
+  localStorage.setItem('wm_favs', JSON.stringify([...favorites]));
+  render();
+}
+
+// ───── MODAL ─────
+function openModal(id) {
+  const p = products.find(x => x.id === id);
+  currentModalId = id;
+  document.getElementById('modalImg').src = p.img;
+  document.getElementById('modalBrand').textContent = p.brand;
+  document.getElementById('modalTitle').textContent = p.name;
+  document.getElementById('modalRating').innerHTML = `<span class="stars">${'★'.repeat(Math.round(p.rating))}${'☆'.repeat(5-Math.round(p.rating))}</span> <span style="font-size:14px;color:#666">${p.rating} · ${p.reviews.toLocaleString()} отзывов</span>`;
+  document.getElementById('modalPrice').textContent = p.price.toLocaleString() + ' ₸';
+  document.getElementById('modalOld').textContent = p.oldPrice ? p.oldPrice.toLocaleString() + ' ₸' : '';
+  document.getElementById('modalDisc').textContent = p.disc ? '-' + p.disc + '%' : '';
+  document.getElementById('modalDesc').textContent = p.desc;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(e) {
+  if (e && e.target !== document.getElementById('modalOverlay') && !e.target.classList.contains('modal-close')) return;
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+  currentModalId = null;
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal({target:document.getElementById('modalOverlay')}); closeCart(); }});
+
+// ───── FILTERS & SORT ─────
+function filterCat(cat) {
+  currentCat = cat;
+  document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active'));
+  event?.target?.classList.add('active');
+  render();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+function sortProducts(val) { currentSort = val; render(); }
+function applyFilters() { render(); }
+function doSearch() { currentCat = 'all'; render(); }
+document.getElementById('searchInput').addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
+
+// ───── TOAST ─────
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ───── INIT ─────
+updateBadge();
+render();
+</script>
+
+
+</body></html>
